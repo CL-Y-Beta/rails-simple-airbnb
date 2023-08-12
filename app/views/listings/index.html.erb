@@ -1,0 +1,39 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>All Flats (<%= @listings.count %>) </h1>
+
+<div id="listings">
+  <% @listings.each do |listing| %>
+
+      <div class="card"  >
+        <div class="flat-card-image" style= "background-image: url('<%= listing.picture %>')"></div>
+        <h2>
+          <%= listing.name %>
+        </h2>
+
+        <p>
+          <%= truncate(listing.address, length: 30) %>
+
+        </p>
+
+        <div class="icons">
+          <p>
+            <i class="fa-solid fa-coins"></i>
+            <%= listing.price_per_night %>
+          </p>
+
+          <p>
+            <i class="fa-solid fa-people-group"></i>
+            <%= listing.number_of_guests %>
+          </p>
+      </div>
+
+      <p class= "card-links">
+        <%= link_to "More info", listing %>
+        <%= link_to "Edit", edit_listing_path(listing) %>
+        <%= link_to "Delete", listing_path(listing), method: :delete,data: { confirm: "Are you sure you want to delete this listing?"}, data: { turbo: "frame" } %>
+      </p>
+
+    </div>
+  <% end %>
+</div>
